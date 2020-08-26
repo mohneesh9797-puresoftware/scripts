@@ -55,6 +55,7 @@ fi
 		export PYENV_ROOT="$HOME/.pyenv"
 		export PATH="$PYENV_ROOT/bin:$PATH"
 		pyenv --version
+		pyenv install 3.6.7
 	fi	
 	pyenv versions
         pyenv global 3.6.7
