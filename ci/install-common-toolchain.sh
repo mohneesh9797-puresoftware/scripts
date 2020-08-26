@@ -85,12 +85,12 @@ fi
     echo "installing pandoc, so we can generate README.rst for Python packages"
     if [ "${OS}" = "linux" ]; then
         if [ `uname -m` = 'aarch64' ]; then
-   		wget https://github.com/commercialhaskell/stack/releases/download/v2.1.3/stack-2.1.3-linux-aarch64.tar.gz -o stack.tar.gz
-		tar -xf stack.tar.gz
+   		wget https://github.com/commercialhaskell/stack/releases/download/v2.1.3/stack-2.1.3-linux-aarch64.tar.gz
+		tar -xf stack-2.1.3-linux-aarch64.tar.gz
 		git clone https://github.com/jgm/pandoc.git
 		cd pandoc
-		stack setup
-		stack install 
+		../stack-2.1.3-linux-aarch64/stack setup
+		../stack-2.1.3-linux-aarch64/stack install 
 		cd ../
 		rm -rf stack.tar.gz stack pandoc
 	else
