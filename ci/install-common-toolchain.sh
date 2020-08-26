@@ -84,8 +84,19 @@ fi
 
     echo "installing pandoc, so we can generate README.rst for Python packages"
     if [ "${OS}" = "linux" ]; then
-        curl -sfL -o /tmp/pandoc.deb "https://github.com/jgm/pandoc/releases/download/${PANDOC_VERSION}/pandoc-${PANDOC_VERSION}-1-amd64.deb"
-        sudo apt-get install /tmp/pandoc.deb
+        if [ `uname -m` = 'aarch64' ]; then
+   		wget https://github.com/commercialhaskell/stack/releases/download/v2.1.3/stack-2.1.3-linux-aarch64.tar.gz -o stack.tar.gz
+		tar -xf stack.tar.gz
+		git clone https://github.com/jgm/pandoc.git
+		cd pandoc
+		stack setup
+		stack install 
+		cd ../
+		rm -rf stack.tar.gz stack pandoc
+	else
+		curl -sfL -o /tmp/pandoc.deb "https://github.com/jgm/pandoc/releases/download/${PANDOC_VERSION}/pandoc-${PANDOC_VERSION}-1-amd64.deb"
+        	sudo apt-get install /tmp/pandoc.deb
+	fi
     else
         # This is currently version 2.6 - we'll likely want to track the version
         # in brew pretty closely in CI, as it's a pain to install otherwise.
